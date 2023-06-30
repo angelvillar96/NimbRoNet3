@@ -1,0 +1,129 @@
+{
+    "dataset": {
+        "dataset_name": "PoseDataset",
+        "shuffle_train": true,
+        "shuffle_eval": false,
+        "augment_eval": false,
+        "img_size": [
+            540,
+            960
+        ],
+        "augmentations": {
+            "augmentations": [
+                "Horizontal flip",
+                "Brightness",
+                "Contrast",
+                "Saturation",
+                "Blur"
+            ],
+            "mirror_prob": 0.5,
+            "degrees": 30,
+            "mean_brightness": 1,
+            "std_brightness": 0.6,
+            "mean_contrast": 1,
+            "std_contrast": 0.3,
+            "mean_saturation": 1,
+            "std_saturation": 0.4,
+            "blur_prob": 0.5,
+            "blur_kernel": [
+                3,
+                7
+            ],
+            "blur_sigma": [
+                1,
+                10
+            ]
+        },
+        "det_files": "new_blod_db_splits.json",
+        "seg_files": "new_seg_db_splits.json"
+    },
+    "model": {
+        "model_name": "NimbroNetV2plus",
+        "backbone": "ResNet18",
+        "pretrained": true,
+        "UNetBaseline": {},
+        "UNetClean": {},
+        "UNetArash": {},
+        "PoseNet": {},
+        "NimbroNetV3": {
+            "base_channels": 128
+        },
+        "NimbroNetV2plus": {
+            "base_channels": 128
+        }
+    },
+    "loss": {
+        "segmentation": [
+            {
+                "type": "cross_entropy",
+                "weight": 1,
+                "ce_weight": [
+                    1,
+                    1,
+                    10
+                ]
+            },
+            {
+                "type": "segmentation total_variation",
+                "weight": 0.0002
+            }
+        ],
+        "detection": [
+            {
+                "type": "mse",
+                "weight": 50
+            },
+            {
+                "type": "total_variation",
+                "weight": 0.002
+            }
+        ],
+        "pose": [
+            {
+                "type": "pose_loss",
+                "weight": 1
+            }
+        ]
+    },
+    "training": {
+        "num_epochs": 200,
+        "frozen_epochs": 1,
+        "save_frequency": 5,
+        "log_frequency": 10,
+        "batch_size": 16,
+        "lr": 0.0001,
+        "lr_encoder": 0.0001,
+        "optimizer": "adam",
+        "momentum": 0,
+        "weight_decay": 0,
+        "nesterov": false,
+        "scheduler": "plateau",
+        "lr_factor": 0.4,
+        "patience": 10,
+        "lr_warmup": false,
+        "warmup_steps": 2000,
+        "warmup_epochs": 2,
+        "early_stopping": true,
+        "early_stopping_patience": 30
+    },
+    "evaluation": {
+        "match_thr": 10,
+        "filter_thr": 12,
+        "kernel_size": 5,
+        "heatmap_thr": 0.1,
+        "peak_thr": 0.3
+    },
+    "pretraining": {
+        "dataset_name": "DenoisingCOCO",
+        "noise_strength": 0.2,
+        "batch_size": 32,
+        "lr": 0.001,
+        "optimizer": "adam",
+        "loss": [
+            {
+                "type": "mse",
+                "weight": 1
+            }
+        ]
+    }
+}
