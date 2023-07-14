@@ -51,15 +51,17 @@ You can find more details and download the data in the [official repository](htt
 
 
 
+<p float="left">
+    <img src="_example2_img.png" width="23%"/>
+    <img src="_example2_det.png" width="23%"/>
+    <img src="_example2_seg.png" width="23%"/>
+    <img src="_example2_pose.png" width="23%"/>
+</p>
 
-<img src="_example2_img.png" width="23%"/>
-<img src="_example2_det.png" width="23%"/>
-<img src="_example2_seg.png" width="23%"/>
-<img src="_example2_pose.png" width="23%"/>
-
-<img src="_example_img.png" width="23%"/>
-<img src="_example_det.png" width="23%"/>
-<img src="_example_seg.png" width="23%"/>
-<img src="_example_pose.png" width="23%"/>
-
+<p float="left">
+    <img src="_example_img.png" width="23%"/>
+    <img src="_example_det.png" width="23%"/>
+    <img src="_example_seg.png" width="23%"/>
+    <img src="_example_pose.png" width="23%"/>
+</p>
 

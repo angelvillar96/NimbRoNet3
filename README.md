@@ -10,11 +10,12 @@ Official implementation of:  **NimbRoNet3: A Unified Model for Real-Time Percept
   <img src="resources/docs/model.png" width="63%"/>
 </p>
 
-<img src="resources/docs/01_imgs.gif" width="23%"/>
-<img src="resources/docs/02_blobs.gif" width="23%"/>
-<img src="resources/docs/03_segm.gif" width="23%"/>
-<img src="resources/docs/04_pose.gif" width="23%"/>
-
+<p float="left">
+  <img src="resources/docs/01_imgs.gif" width="23%"/>
+  <img src="resources/docs/02_blobs.gif" width="23%"/>
+  <img src="resources/docs/03_segm.gif" width="23%"/>
+  <img src="resources/docs/04_pose.gif" width="23%"/>
+</p>
 
 
 
