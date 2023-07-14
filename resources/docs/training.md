@@ -21,7 +21,7 @@ optional arguments:
 **2.** Modify the experiment parameters located in `experiments/YOUR_EXP_DIR/YOUR_EXP_NAME/experiment_params.json` to adapt to your dataset and training needs.
 We provide one [example](https://github.com/angelvillar96/NimbRoNet3/blob/master/src/configs/nimbronet3.json) for training our NimbRoNet3.
 
-For instance, you can change the "/model/model_name" parameter to choose which model type you want to train, e.g., NimbRoNet2, NimbRoNet2+, or NimbRoNet3.
+For instance, you can change the `/model/model_name` parameter to choose which model type you want to train, e.g., NimbRoNet2, NimbRoNet2+, or NimbRoNet3.
 
 
 
@@ -42,22 +42,25 @@ optional arguments:
 
 The training can be monitored using Tensorboard.
 To launch tensorboard:
-    ```
-    tensorboard --logdir experiments/EXP_DIR/EXP_NAME --port 8888
-    ```
+
+```
+tensorboard --logdir experiments/EXP_DIR/EXP_NAME --port 8888
+```
+
 
 **4.** Evaluate a trained model using the `src/03_evaluate_nimbronetv2.py` or `src/03_evaluate_nimbronetv3.py`
 scripts.
 
 usage: 03_evaluate_nimbronetv3.py [-h] -d EXP_DIRECTORY [--checkpoint CHECKPOINT]
 
+```
 optional arguments:
   -h, --help            show this help message and exit
   -d EXP_DIRECTORY, --exp_directory EXP_DIRECTORY
                         Path to the experiment directory
   --checkpoint CHECKPOINT
                         Checkpoint with pretrained parameters to load
-
+```
 
 
 
