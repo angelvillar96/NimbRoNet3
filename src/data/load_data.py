@@ -5,8 +5,7 @@ Methods for loading specific datasets, fitting data loaders and other
 import os
 from torch.utils.data import DataLoader, random_split
 from CONFIG import DATASETS, CONFIG
-from data import BlobDataset, SegmentationDataset, PoseDataset, DetectionDataset, \
-                 DenoisingCOCO, DirDatasetDet, DirDatasetSeg
+from data import BlobDataset, SegmentationDataset, PoseDataset
 from lib.utils import set_random_seed
 
 
@@ -74,36 +73,6 @@ def load_data(exp_params, split, datapath=None, resources_path=None, **kwargs):
                 augmentations=augmentations,
                 use_augmentations=use_augmentations
             )
-    elif(dataset_name == "DetectionDataset"):
-        path = os.path.join(datapath, "blob", "dataset")
-        dataset = DetectionDataset(
-                path=path,
-                resources_path=resources_path,
-                split=split,
-                img_size=img_size,
-                augmentations=augmentations,
-                use_augmentations=use_augmentations
-            )
-    elif(dataset_name == "DenoisingCOCO"):
-        dataset = DenoisingCOCO(
-                resources_path=resources_path,
-                split=split,
-                noise_strength=kwargs.get("noise_strength", 0.2)
-            )
-    elif(dataset_name == "DirDatasetDet"):
-        dataset = DirDatasetDet(
-                img_size=img_size,
-                augmentations=augmentations,
-                use_augmentations=use_augmentations,
-                path=datapath
-            )
-    elif(dataset_name == "DirDatasetSeg"):
-        dataset = DirDatasetSeg(
-                img_size=img_size,
-                augmentations=augmentations,
-                use_augmentations=use_augmentations,
-                path=datapath
-            )
     else:
         raise NotImplementedError(f"Dataset'{dataset_name}' is not available. Use one of {DATASETS}...")
 
@@ -135,7 +104,9 @@ def build_data_loader(dataset, batch_size=8, shuffle=False):
 
 
 def manual_data_split(dataset, train_size=0.7, valid_size=0.15, test_size=0.15, fix_seed=True):
-    """ Splitting a dataset into train-valid-test """
+    """
+    Splitting a dataset into train-valid-test
+    """
     assert train_size + valid_size + test_size == 1
     train_size = int(train_size * len(dataset))
     val_size = int(valid_size * len(dataset))

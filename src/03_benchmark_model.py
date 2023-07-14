@@ -19,14 +19,12 @@ import data
 class Benchmarker:
     """ Class for benchmarking a model """
 
-    def __init__(self, exp_path, checkpoint, quantize=False, half_precision=False):
+    def __init__(self, exp_path, checkpoint):
         """ Initializing the benchmarker object """
         self.exp_path = exp_path
         self.cfg = Config(exp_path)
         self.exp_params = self.cfg.load_exp_config_file()
         self.checkpoint = checkpoint
-        self.quantize = quantize
-        self.half_precision = half_precision
 
         self.models_path = os.path.join(self.exp_path, "models")
         self.results_path = os.path.join(self.exp_path, "results")
@@ -55,14 +53,6 @@ class Benchmarker:
                 only_model=True
             )
         print_("  --> Pretrained parameters loaded successfully")
-
-        # quantizing and changing precission
-        if self.half_precision:
-            print_("  --> Setting model to half precission...")
-            self.model = self.model.half()
-        if self.quantize:
-            print_("  --> Quantizing model to qInt8")
-            self.model = model_utils.quantize_model(self.model)
         self.model = self.model.eval().to(self.device)
         return
 
@@ -75,8 +65,6 @@ class Benchmarker:
 
         print_("Benchmarking FLOPS and #Activations...")
         img = self.dataset[0][0].to(self.device)
-        if self.half_precision:
-            img = img.half()
         total_flops, total_act = model_utils.compute_flops(
                 model=self.model,
                 dummy_input=img.unsqueeze(0),
@@ -91,8 +79,7 @@ class Benchmarker:
                 device=self.device,
                 num_imgs=500,
                 use_tqdm=True,
-                verbose=True,
-                half_precission=self.half_precision
+                verbose=True
             )
 
         print_("Saving benchmark results...")
@@ -104,7 +91,7 @@ class Benchmarker:
             "avg_time_per_img": avg_time_per_img
         }
         checkpoint_name = self.checkpoint.split(".")[0]
-        fname = f"benchmark_{checkpoint_name}_quantized_{self.quantize}_half_{self.half_precision}.json"
+        fname = f"benchmark_{checkpoint_name}.json"
         savepath = os.path.join(self.results_path, fname)
         with open(savepath, "w") as f:
             json.dump(results, f)
@@ -123,8 +110,6 @@ if __name__ == "__main__":
     benchmarker = Benchmarker(
             exp_path=exp_path,
             checkpoint=args.checkpoint,
-            quantize=args.quantize,
-            half_precision=args.half_precision
         )
     print_("Loading dataset...")
     benchmarker.load_data()

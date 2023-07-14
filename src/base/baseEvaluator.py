@@ -21,7 +21,7 @@ class BaseEvaluator:
     def __init__(self, exp_path, checkpoint):
         """ Initializing the evaluator object """
         self.exp_path = exp_path
-        self.cfg = Config()
+        self.cfg = Config(exp_path)
         self.exp_params = self.cfg.load_exp_config_file(exp_path)
         self.checkpoint = checkpoint
 
@@ -74,15 +74,11 @@ class BaseEvaluator:
         self.det_metric_tracker = MetricTracker(
                 metrics="detection",
                 num_classes=self.det_dataset.NUM_CLASSES,
-                quantize=self.quantize,
-                half_precision=self.half_precision,
                 **eval_params
             )
         self.seg_metric_tracker = MetricTracker(
                 metrics="segmentation",
                 num_classes=self.seg_dataset.NUM_CLASSES,
-                quantize=self.quantize,
-                half_precision=self.half_precision,
                 **eval_params
             )
         

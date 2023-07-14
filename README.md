@@ -1,6 +1,20 @@
 # NimbRoNet3: A Unified Model for Real-Time Perception on the Soccer-Field
 
-Code to reproduce the vision module of our NimbRo-OP models
+
+Official implementation of:  **NimbRoNet3: A Unified Model for Real-Time Perception on the Soccer-Field**, presented at the RoboCup 2023 Humanoid Adult-Size league Software Challenge. [[Poster](http://www.angelvillarcorrales.com/templates/others/Publications/2023%20RoboCup_%20NimbroNetv3_Poster.pdf?i=1)]
+
+
+<p float="left">
+  <img src="resources/docs/teaser.png" width="33%" />
+  &nbsp;&nbsp; &nbsp;
+  <img src="resources/docs/model.png" width="63%"/>
+</p>
+
+<img src="resources/docs/01_imgs.gif" width="24.5%"/>
+<img src="resources/docs/02_blobs.gif" width="24.5%"/>
+<img src="resources/docs/03_segm.gif" width="24.5%"/>
+<img src="resources/docs/04_pose.gif" width="24.5%"/>
+
 
 
 ## Contact

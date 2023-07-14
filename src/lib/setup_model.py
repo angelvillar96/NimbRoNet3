@@ -37,8 +37,8 @@ def setup_model(model_params):
     cur_model_params = model_params.get(model_name, {})
 
     # Detection and Segmentation
-    if(model_name == "UNetBaseline"):
-        model = models.UNet34(**cur_model_params)
+    if(model_name == "NimbroNetV2"):
+        model = models.NimbroNetV2(**cur_model_params)
     elif (model_name == "NimbroNetV2plus"):
         encoder, _ = setup_encoder(model_params)
         model = models.NimbroNetV2plus(encoder=encoder, **cur_model_params)
@@ -110,22 +110,10 @@ def emergency_save(f):
 
 
 @log_function
-def save_checkpoint(model, optimizer, scheduler, epoch, exp_path, finished=False, savedir="models", savename=None):
+def save_checkpoint(trainer, finished=False, savedir="models", savename=None):
     """
     Saving a checkpoint in the models directory of the experiment. This checkpoint
     contains state_dicts for the mode, optimizer and lr_scheduler
-    Args:
-    -----
-    model: torch Module
-        model to be saved to a .pth file
-    optimizer, scheduler: torch Optim
-        modules corresponding to the parameter optimizer and lr-scheduler
-    epoch: integer
-        current epoch number
-    exp_path: string
-        path to the root directory of the experiment
-    finished: boolean
-        if True, current checkpoint corresponds to the finally trained model
     """
 
     if(savename is not None):
@@ -133,16 +121,16 @@ def save_checkpoint(model, optimizer, scheduler, epoch, exp_path, finished=False
     elif(savename is None and finished is True):
         checkpoint_name = "checkpoint_epoch_final.pth"
     else:
-        checkpoint_name = f"checkpoint_epoch_{epoch}.pth"
+        checkpoint_name = f"checkpoint_epoch_{trainer.epoch}.pth"
 
-    create_directory(exp_path, savedir)
-    savepath = os.path.join(exp_path, savedir, checkpoint_name)
+    create_directory(trainer.exp_path, savedir)
+    savepath = os.path.join(trainer.exp_path, savedir, checkpoint_name)
 
-    scheduler_data = "" if scheduler is None else scheduler.state_dict()
+    scheduler_data = "" if trainer.scheduler is None else trainer.scheduler.state_dict()
     torch.save({
-            'epoch': epoch,
-            'model_state_dict': model.state_dict(),
-            'optimizer_state_dict': optimizer.state_dict(),
+            'epoch': trainer.epoch,
+            'model_state_dict': trainer.model.state_dict(),
+            'optimizer_state_dict': trainer.optimizer.state_dict(),
             "scheduler_state_dict": scheduler_data
             }, savepath)
 

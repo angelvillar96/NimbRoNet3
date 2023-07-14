@@ -162,4 +162,14 @@ class NimbroNetV3(NimbroNetBase):
                 nn.init.constant_(m.bias, 0)
         return
     
-
+    def _remove_padding(self, lr_outs, hr_outs, H):
+        """
+        Removing the extra padding added to handle sizes not divisible by 32
+        """
+        pad_size = int(H / 32. + .5) * 32 - H
+        pad_size_lr, pad_size_hr = int(pad_size / 4.), int(pad_size / 2.)
+        if pad_size_lr > 0:
+            lr_outs = [lr_out[:, :, :-pad_size_lr] for lr_out in lr_outs]
+        if pad_size_hr > 0:    
+            hr_outs = [hr_out[:, :, :-pad_size_lr] for hr_out in hr_outs]
+        return lr_outs, hr_outs

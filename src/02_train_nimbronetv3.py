@@ -9,9 +9,10 @@ import torch
 
 from base.baseTrainer import BaseTrainer
 from lib.arguments import get_directory_argument
-from lib.logger import Logger, log_function, for_all_methods
+from lib.logger import Logger, log_function, for_all_methods, print_
 import lib.utils as utils
 from lib.visualizations import visualize_pose_predictions, visualize_img_target_pred
+import data
 
 
 @for_all_methods(log_function)
@@ -20,6 +21,30 @@ class Trainer(BaseTrainer):
     Class for training the complete NimbRoNet3 model for real-time detection, segmentation
     and robot pose estimation on the soccer field.
     """
+
+    def load_data(self):
+        super().load_data()
+        batch_size = self.exp_params["training"]["batch_size"]
+        shuffle_train = self.exp_params["dataset"]["shuffle_train"]
+        shuffle_eval = self.exp_params["dataset"]["shuffle_eval"]
+
+        print_("Loading Robot Pose Estimation Dataset...")
+        self.exp_params["dataset"]["dataset_name"] = "PoseDataset"
+        pose_train_set = data.load_data(exp_params=self.exp_params, split="train")
+        pose_valid_set = data.load_data(exp_params=self.exp_params, split="valid")
+        self.pose_train_loader = data.build_data_loader(
+                dataset=pose_train_set,
+                batch_size=batch_size,
+                shuffle=shuffle_train
+            )
+        self.pose_valid_loader = data.build_data_loader(
+                dataset=pose_valid_set,
+                batch_size=batch_size,
+                shuffle=shuffle_eval
+            )
+        print_(f"  --> Num. Train Samples: {len(pose_train_set)}")
+        print_(f"  --> Num. Valid Samples: {len(pose_valid_set)}")
+        return
 
     def train_epoch(self, epoch):
         """
@@ -169,7 +194,7 @@ class Trainer(BaseTrainer):
             progress_bar.set_description(f"Epoch {epoch+1} iter {i}: valid loss {loss.item():.5f}. ")
 
             # visualizing some examples
-            if i < 1 and self.savefigs is True:
+            if i < 1:
                 # segmentation visualization
                 seg_preds = segmentation.argmax(dim=1)
                 fig, _, _ = visualize_img_target_pred(

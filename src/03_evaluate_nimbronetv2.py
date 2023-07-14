@@ -7,6 +7,7 @@ Evaluating a NimbRoNet-v2plus model checkpoint for the following vision tasks:
 import os
 import torch
 
+from base.baseEvaluator import BaseEvaluator
 from lib.arguments import evaluation_arguments
 from lib.logger import Logger, print_, log_function, for_all_methods
 import lib.utils as utils
@@ -14,7 +15,7 @@ from lib.visualizations import plot_confusion_matrix
 
 
 @for_all_methods(log_function)
-class Evaluator:
+class Evaluator(BaseEvaluator):
     """
     Class for evaluating a NimbRoNet-v2plus model checkpoint for the following vision tasks:
         - Object detection
@@ -71,9 +72,7 @@ if __name__ == "__main__":
     print_("Initializing Evaluator...")
     evaluator = Evaluator(
             exp_path=exp_path,
-            checkpoint=args.checkpoint,
-            quantize=args.quantize,
-            half_precision=args.half_precision
+            checkpoint=args.checkpoint
         )
     print_("Loading dataset...")
     evaluator.load_data()

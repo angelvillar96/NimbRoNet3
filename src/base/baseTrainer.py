@@ -13,7 +13,6 @@ from lib.loss import LossTracker
 from lib.metrics import MetricTracker
 from lib.schedulers import EarlyStop, Freezer
 from lib.setup_model import emergency_save
-from models.model_utils import GradientInspector
 import lib.setup_model as setup_model
 import lib.utils as utils
 import data
@@ -43,7 +42,7 @@ class BaseTrainer:
         Initializing the trainer object
         """
         self.exp_path = exp_path
-        self.cfg = Config()
+        self.cfg = Config(exp_path)
         self.exp_params = self.cfg.load_exp_config_file(exp_path)
         self.checkpoint = checkpoint
         self.resume_training = resume_training
@@ -149,7 +148,7 @@ class BaseTrainer:
         # other optimization objects
         self.model = model
         self.freezer = Freezer(
-                module=self.model.encode,
+                module=self.model.encoder,
                 frozen_epochs=self.exp_params["training"]["frozen_epochs"]
             )
         self.early_stopping = EarlyStop(

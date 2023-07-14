@@ -16,7 +16,7 @@ import torchvision.transforms.functional as F
 from data.data_utils import get_heatmap, pad_img_target
 from lib.augmentations import Augmentator
 
-PATH = "/home/user/villar/datasets/Robocup_Hafez_Data/test/forceTrainDet"
+PATH = ""
 
 
 class DirDataset:

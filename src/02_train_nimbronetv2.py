@@ -136,7 +136,7 @@ class Trainer(BaseTrainer):
             progress_bar.set_description(f"Epoch {epoch+1} iter {i}: valid loss {loss.item():.5f}. ")
 
             # visualizing some examples
-            if i < 1 and self.savefigs is True:
+            if i < 1:
                 # segmentation visualization
                 seg_preds = segmentation.argmax(dim=1)
                 fig, _, _ = visualize_img_target_pred(

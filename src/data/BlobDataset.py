@@ -91,7 +91,6 @@ class BlobDataset(Dataset):
 
         # getting images and annotations
         files = []
-        # for ext in ('*.jpeg', '*.png', '*.jpg'):
         for ext in ('**/*.jpeg', '**/*.png', '**/*.jpg'):
             files.extend(glob(os.path.join(path, ext), recursive=True))
         self.filtered_files = []

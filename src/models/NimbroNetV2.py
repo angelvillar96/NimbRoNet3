@@ -94,7 +94,7 @@ class NimbroNetV2(NimbroNetBase):
         # detection/segmentatio head
         detections = self.detection_head(out_block_1)
         segmentation = self.segmentation_head(out_block_1)
-        return (detections, segmentation)
+        return {"detections": detections, "segmentation": segmentation}
 
     def initialize_params(self):
         """ Calling the initialization of model parameters for the decoder and heads """

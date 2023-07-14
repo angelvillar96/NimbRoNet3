@@ -18,7 +18,6 @@ CONFIG = {
         "configs_path": os.path.join(os.getcwd(), "src", "configs"),
         "test_path": os.path.join(os.getcwd(), "test"),
         "resources_path": os.path.join(os.getcwd(), "resources"),
-        "coco_path": "/home/nfs/inf6/data/datasets/coco"
     }
 }
 
@@ -120,7 +119,7 @@ DEFAULTS = {
         ],
         "pose": [
             {
-                "type": "pose",
+                "type": "pose_loss",
                 "weight": 1
             }
         ]
