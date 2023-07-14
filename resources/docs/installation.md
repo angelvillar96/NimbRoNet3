@@ -43,9 +43,8 @@ You can see example of segmentation maps below.
 
 For robot pose estimation, we use our prevously publised dataset from:
 
-```
-Amini et al. "Real-time pose estimation from images for multiple humanoid robots." Robot World Cup. Cham: Springer International Publishing, 2021. 91-102.
-```
+ - Amini et al. "Real-time pose estimation from images for multiple humanoid robots." Robot World Cup. Cham: Springer International Publishing, 2021. 91-102.
+
 
 You can find more details and download the data in the [official repository](https://github.com/AIS-Bonn/HumanoidRobotPoseEstimation/tree/main).
 
