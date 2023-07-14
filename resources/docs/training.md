@@ -19,7 +19,7 @@ optional arguments:
 
 
 **2.** Modify the experiment parameters located in `experiments/YOUR_EXP_DIR/YOUR_EXP_NAME/experiment_params.json` to adapt to your dataset and training needs.
-We provide one [example](https://github.com/angelvillar96/NimbRoNet3/tree/master/src/configs/numbronet3.json) for training our NimbRoNet3.
+We provide one [example](https://github.com/angelvillar96/NimbRoNet3/blob/master/src/configs/nimbronet3.json) for training our NimbRoNet3.
 
 For instance, you can change the "/model/model_name" parameter to choose which model type you want to train, e.g., NimbRoNet2, NimbRoNet2+, or NimbRoNet3.
 
