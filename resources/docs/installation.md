@@ -28,7 +28,7 @@ The detection dataset containes pairs of images with detection labels.
 These labels correspond to the center of the ball, center-bottom of goal-posts, and center-bottom of obstacles, where Gaussian blobs
 will be centered as in the examples below.
 
-Labels can be given in XML format as in the following [example](https://github.com/angelvillar96/NimbRoNet3/tree/master/resources/_example_xml.xml)
+Labels can be given in XML format as in the following [example](https://github.com/angelvillar96/NimbRoNet3/blob/master/resources/docs/_example_xml.xml)
 
 
 
