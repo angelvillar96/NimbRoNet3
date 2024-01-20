@@ -1,7 +1,7 @@
 # NimbRoNet3: A Unified Model for Real-Time Perception on the Soccer-Field
 
 
-Official implementation of:  **NimbRoNet3: A Unified Model for Real-Time Perception on the Soccer-Field**, presented at the RoboCup 2023 Humanoid Adult-Size league Software Challenge. [[Poster](http://www.angelvillarcorrales.com/templates/others/Publications/2023%20RoboCup_%20NimbroNetv3_Poster.pdf?i=1)]
+Official implementation of:  **NimbRoNet3: A Unified Model for Real-Time Perception on the Soccer-Field**, presented at the RoboCup 2023 Humanoid Adult-Size league Software Challenge. [[Poster](http://www.angelvillarcorrales.com/templates/others/Publications/2023%20RoboCup_%20NimbroNetv3_Poster.pdf?i=1)] [[Paper](https://arxiv.org/abs/2401.05909)]
 
 
 <p float="left">
@@ -46,9 +46,23 @@ For further information about our NimbRoNet models and our system, we refer to o
 
 
 
-## Contact
+
+## Contact and Citation
 
 This repository is maintained by [Angel Villar-Corrales](http://angelvillarcorrales.com/templates/home.php).
 
-The structure is based on [TemplaTorch](https://github.com/angelvillar96/TemplaTorch),
-In case of any questions or problems regarding the project or repository, do not hesitate to contact the authors at *villar@ais.uni-bonn.de*.
+Please consider citing our paper if you find our work or our repository helpful.
+
+```
+@incollection{NimbRoWinnerRoboCup2023,
+	title={{RoboCup 2023 Humanoid AdultSize Winner NimbRo: NimbRoNet3 Visual Perception and Responsive Gait with Waveform In-walk Kicks}},
+	author={Pavlichenko, Dmytro and Ficht, Grzegorz and Villar-Corrales, Angel and Denninger, Luis and Brocker, Julia and Sinen, Tim and Schreiber, Michael and Behnke, Sven},
+	booktitle={RoboCup 2023: Robot World Cup XXVI},
+	pages={},
+	year={2024},
+	publisher={Springer}
+}
+```
+
+In case of any questions or problems regarding the project or repository, do not hesitate to contact the authors at villar@ais.uni-bonn.de.
+
